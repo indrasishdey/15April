@@ -16,7 +16,8 @@ public class AppTest
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         System.out.println("launching chrome");
-        driver.get("https://www.google.co.in/");
+        //driver.get("https://www.google.co.in/");
+	driver.get("https://www.orangehrm.com/");
         try {
 			Thread.sleep(4000);
 		} catch (InterruptedException e) {
