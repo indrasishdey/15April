@@ -6,7 +6,7 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('Test the Project') {
             steps {
                 // Get some code from a GitHub repository
                 git 'https://github.com/indrasishdey/15April.git'
@@ -20,7 +20,8 @@ pipeline {
                 // If Maven was able to run the tests, even if some of the test
                 // failed, record the test results and archive the jar file.
                 success {
-                    junit '**/target/surefire-reports/TEST-*.xml'
+                echo 'Test Run is successful!'
+                    //junit '**/target/surefire-reports/TEST-*.xml'
                     //archiveArtifacts 'target/*.jar'
                 }
             }
