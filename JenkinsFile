@@ -1,21 +1,27 @@
-
 pipeline {
     agent any
+
+    tools {
+        maven "MAVEN_HOME"
+    }
 
     stages {
         stage('Build') {
             steps {
-                echo 'Build Git Pipe'
+                // Get some code from a GitHub repository
+                git 'https://github.com/indrasishdey/15April.git'
+
+                // To run Maven on a Windows agent, use
+                // bat "mvn -Dmaven.test.failure.ignore=true clean package"
             }
-        }
-        stage('Test') {
-            steps {
-                echo 'Test Git Pipe'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploy Git Pipe'
+
+            post {
+                // If Maven was able to run the tests, even if some of the test
+                // failed, record the test results and archive the jar file.
+                success {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                    archiveArtifacts 'target/*.jar'
+                }
             }
         }
     }
